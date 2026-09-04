@@ -1,0 +1,8 @@
+# Vercel builds from source; never upload local artifacts.
+# Without this the CLI tried to upload ~1.7GB and the deploy never finished.
+node_modules
+.next
+.git
+.playwright-mcp
+*.log
+.env*.local
