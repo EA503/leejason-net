@@ -1,0 +1,51 @@
+.header {
+  position: sticky;
+  top: 0;
+  background: rgba(20, 24, 28, 0.92);
+  backdrop-filter: blur(6px);
+  z-index: 50;
+  border-bottom: 1px solid var(--line-dark);
+}
+
+.header :global(.wrap) {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 18px;
+  padding-bottom: 18px;
+  color: var(--cream-text);
+}
+
+.logo {
+  font-family: var(--font-fraunces), serif;
+  font-size: 19px;
+}
+
+.nav {
+  display: flex;
+  gap: 28px;
+}
+
+.nav a {
+  font-size: 14px;
+  color: var(--cream-dim);
+  transition: color 0.15s ease;
+}
+
+.nav a:hover {
+  color: var(--cream-text);
+}
+
+.navCta {
+  font-size: 14px;
+  color: var(--ink);
+  background: var(--brass);
+  padding: 9px 18px;
+  border-radius: 2px;
+}
+
+@media (max-width: 860px) {
+  .nav {
+    display: none;
+  }
+}

@@ -1,0 +1,96 @@
+.podcast {
+  background: var(--teal);
+  color: var(--cream-text);
+  padding: 100px 0;
+}
+
+.top {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  margin-bottom: 60px;
+  align-items: start;
+}
+
+.eyebrow {
+  font-size: 14px;
+  color: var(--brass-bright);
+  margin-bottom: 14px;
+}
+
+.top h2 {
+  font-size: 36px;
+  line-height: 1.15;
+}
+
+.question {
+  font-size: 18px;
+  font-style: italic;
+  color: var(--cream-text);
+  line-height: 1.5;
+}
+
+.listenLinks {
+  margin-top: 26px;
+  display: flex;
+  gap: 22px;
+  font-size: 14px;
+}
+
+.listenLinks a {
+  color: var(--brass-bright);
+  border-bottom: 1px solid rgba(201, 165, 110, 0.4);
+  padding-bottom: 2px;
+}
+
+.listenLinks a:hover {
+  border-bottom-color: var(--brass-bright);
+}
+
+.episodes {
+  border-top: 1px solid rgba(242, 239, 234, 0.2);
+}
+
+.episode {
+  display: grid;
+  grid-template-columns: 110px 1fr 1fr;
+  gap: 24px;
+  padding: 22px 0;
+  border-bottom: 1px solid rgba(242, 239, 234, 0.2);
+  align-items: baseline;
+}
+
+.epDate {
+  font-size: 13px;
+  color: var(--cream-dim);
+}
+
+.epGuest {
+  font-size: 16px;
+  font-family: var(--font-fraunces), serif;
+}
+
+.epTitle {
+  font-size: 14.5px;
+  color: var(--cream-dim);
+}
+
+/* Only rows that actually link somewhere react to the pointer. */
+a.episode {
+  transition: opacity 0.15s ease;
+}
+
+a.episode:hover {
+  opacity: 0.72;
+}
+
+@media (max-width: 860px) {
+  .top {
+    grid-template-columns: 1fr;
+  }
+
+  .episode {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+}

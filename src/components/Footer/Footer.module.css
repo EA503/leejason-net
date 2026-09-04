@@ -1,0 +1,51 @@
+.footer {
+  background: var(--ink);
+  color: var(--cream-text);
+  padding: 90px 0 40px;
+}
+
+.main {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr 1fr;
+  gap: 40px;
+  padding-bottom: 60px;
+  border-bottom: 1px solid var(--line-dark);
+}
+
+.main h2 {
+  font-size: 32px;
+  line-height: 1.2;
+  max-width: 14ch;
+}
+
+.colLabel {
+  font-size: 13px;
+  color: var(--cream-dim);
+  margin-bottom: 14px;
+}
+
+.col a,
+.col p {
+  display: block;
+  font-size: 15px;
+  color: var(--cream-text);
+  margin-bottom: 8px;
+}
+
+.col a:hover {
+  color: var(--brass-bright);
+}
+
+.bottom {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 26px;
+  font-size: 13px;
+  color: var(--cream-dim);
+}
+
+@media (max-width: 860px) {
+  .main {
+    grid-template-columns: 1fr;
+  }
+}

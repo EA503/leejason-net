@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jason Lee — Concierge Business Advisor & Host of The Living Question</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #14181C;
+    --ink-soft: #1D2229;
+    --parchment: #EDE7DD;
+    --parchment-dim: #E2DCCF;
+    --brass: #B08D57;
+    --brass-bright: #C9A56E;
+    --teal: #3E5C55;
+    --cream-text: #F2EFEA;
+    --cream-dim: rgba(242,239,234,0.62);
+    --dark-text: #1B1F23;
+    --dark-dim: rgba(27,31,35,0.62);
+    --line-dark: rgba(242,239,234,0.16);
+    --line-light: rgba(27,31,35,0.16);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  section[id], footer[id] { scroll-margin-top: 76px; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--parchment);
+    color: var(--dark-text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, .display {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  .wrap {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  .draft-note {
+    display: inline-block;
+    font-size: 12px;
+    font-family: 'Inter', sans-serif;
+    color: var(--brass);
+    border: 1px solid rgba(176,141,87,0.4);
+    border-radius: 3px;
+    padding: 2px 8px;
+    margin-bottom: 14px;
+    letter-spacing: 0.01em;
+  }
+
+  /* ---------- HEADER ---------- */
+  header {
+    position: sticky;
+    top: 0;
+    background: rgba(20,24,28,0.92);
+    backdrop-filter: blur(6px);
+    z-index: 50;
+    border-bottom: 1px solid var(--line-dark);
+  }
+  header .wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 18px;
+    padding-bottom: 18px;
+    color: var(--cream-text);
+  }
+  .logo {
+    font-family: 'Fraunces', serif;
+    font-size: 19px;
+  }
+  nav { display: flex; gap: 28px; }
+  nav a {
+    font-size: 14px;
+    color: var(--cream-dim);
+    transition: color 0.15s ease;
+  }
+  nav a:hover { color: var(--cream-text); }
+  .nav-cta {
+    font-size: 14px;
+    color: var(--ink);
+    background: var(--brass);
+    padding: 9px 18px;
+    border-radius: 2px;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    background: var(--ink);
+    color: var(--cream-text);
+    padding: 110px 0 100px;
+  }
+  .hero .wrap {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 60px;
+    align-items: end;
+  }
+  .hero-role {
+    font-size: 14px;
+    color: var(--brass-bright);
+    margin-bottom: 22px;
+  }
+  .hero h1 {
+    font-size: 60px;
+    line-height: 1.04;
+    margin-bottom: 26px;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--brass-bright);
+  }
+  .hero-lede {
+    font-size: 18px;
+    color: var(--cream-dim);
+    max-width: 46ch;
+  }
+  .hero-side {
+    border-left: 1px solid var(--line-dark);
+    padding-left: 32px;
+  }
+  .hero-side p {
+    font-size: 15px;
+    color: var(--cream-dim);
+    margin-bottom: 24px;
+  }
+  .cta-row { display: flex; flex-direction: column; gap: 12px; }
+  .btn {
+    display: inline-block;
+    font-size: 14px;
+    padding: 13px 0;
+    border-bottom: 1px solid var(--line-dark);
+    color: var(--cream-text);
+  }
+  .btn span { color: var(--brass-bright); margin-right: 8px; }
+
+  .photo-placeholder {
+    border: 1px dashed var(--line-dark);
+    border-radius: 2px;
+    padding: 34px 20px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--cream-dim);
+    margin-bottom: 28px;
+  }
+
+  /* ---------- DUALITY (Business / Thinking) ---------- */
+  .duality {
+    background: var(--parchment);
+    padding: 100px 0;
+  }
+  .duality-head {
+    max-width: 60ch;
+    margin-bottom: 64px;
+  }
+  .duality-head .eyebrow-line {
+    font-size: 14px;
+    color: var(--teal);
+    margin-bottom: 14px;
+  }
+  .duality-head h2 {
+    font-size: 34px;
+    line-height: 1.2;
+  }
+  .duality-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-top: 1px solid var(--line-light);
+  }
+  .duality-col {
+    padding: 40px 40px 40px 0;
+    border-right: 1px solid var(--line-light);
+  }
+  .duality-col:last-child {
+    border-right: none;
+    padding-left: 40px;
+    padding-right: 0;
+  }
+  .duality-col .tag {
+    font-size: 13px;
+    color: var(--brass);
+    margin-bottom: 16px;
+  }
+  .duality-col h3 {
+    font-size: 26px;
+    margin-bottom: 14px;
+    font-weight: 500;
+  }
+  .duality-col p {
+    font-size: 15.5px;
+    color: var(--dark-dim);
+    margin-bottom: 18px;
+  }
+  .duality-col ul { list-style: none; }
+  .duality-col li {
+    font-size: 14.5px;
+    color: var(--dark-dim);
+    padding: 9px 0;
+    border-top: 1px solid var(--line-light);
+  }
+  .duality-col li:first-child { border-top: none; }
+
+  /* ---------- ABOUT / CBA ---------- */
+  .about {
+    background: var(--ink-soft);
+    color: var(--cream-text);
+    padding: 100px 0;
+  }
+  .about .wrap {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 70px;
+  }
+  .about .eyebrow-line {
+    font-size: 14px;
+    color: var(--brass-bright);
+    margin-bottom: 14px;
+  }
+  .about h2 {
+    font-size: 30px;
+    line-height: 1.25;
+    max-width: 16ch;
+  }
+  .about-body p {
+    font-size: 16px;
+    color: var(--cream-dim);
+    margin-bottom: 18px;
+    max-width: 58ch;
+  }
+  .about-body .draft-note { margin-top: 6px; }
+
+  /* ---------- PODCAST ---------- */
+  .podcast {
+    background: var(--teal);
+    color: var(--cream-text);
+    padding: 100px 0;
+  }
+  .podcast-top {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    margin-bottom: 60px;
+    align-items: start;
+  }
+  .podcast-top .eyebrow-line {
+    font-size: 14px;
+    color: var(--brass-bright);
+    margin-bottom: 14px;
+  }
+  .podcast-top h2 {
+    font-size: 36px;
+    line-height: 1.15;
+  }
+  .podcast-top .question {
+    font-size: 18px;
+    font-style: italic;
+    color: var(--cream-text);
+    line-height: 1.5;
+  }
+  .podcast-top .listen-links {
+    margin-top: 26px;
+    display: flex;
+    gap: 22px;
+    font-size: 14px;
+  }
+  .podcast-top .listen-links a {
+    color: var(--brass-bright);
+    border-bottom: 1px solid rgba(201,165,110,0.4);
+    padding-bottom: 2px;
+  }
+
+  .episodes { border-top: 1px solid rgba(242,239,234,0.2); }
+  .episode {
+    display: grid;
+    grid-template-columns: 110px 1fr 1fr;
+    gap: 24px;
+    padding: 22px 0;
+    border-bottom: 1px solid rgba(242,239,234,0.2);
+    align-items: baseline;
+  }
+  .episode .ep-date {
+    font-size: 13px;
+    color: var(--cream-dim);
+  }
+  .episode .ep-guest {
+    font-size: 16px;
+    font-family: 'Fraunces', serif;
+  }
+  .episode .ep-title {
+    font-size: 14.5px;
+    color: var(--cream-dim);
+  }
+
+  /* ---------- CONNECT ---------- */
+  .connect {
+    background: var(--ink);
+    color: var(--cream-text);
+    padding: 90px 0;
+  }
+  .connect .eyebrow-line {
+    font-size: 14px;
+    color: var(--brass-bright);
+    margin-bottom: 14px;
+  }
+  .connect h2 {
+    font-size: 32px;
+    margin-bottom: 50px;
+    max-width: 24ch;
+  }
+  .connect-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--line-dark);
+    border: 1px solid var(--line-dark);
+  }
+  .connect-item {
+    background: var(--ink);
+    padding: 26px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .connect-item .platform {
+    font-size: 14px;
+    color: var(--cream-text);
+  }
+  .connect-item .count {
+    font-family: 'Fraunces', serif;
+    font-size: 26px;
+    color: var(--brass-bright);
+  }
+
+  /* ---------- MOMENTS (photo/video placeholder grid) ---------- */
+  .moments {
+    background: var(--ink-soft);
+    padding: 90px 0;
+  }
+  .moments .eyebrow-line {
+    font-size: 14px;
+    color: var(--brass-bright);
+    margin-bottom: 14px;
+  }
+  .moments h2 {
+    color: var(--cream-text);
+    font-size: 30px;
+    margin-bottom: 40px;
+    max-width: 22ch;
+  }
+  .moments-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  .moments-grid .slot {
+    aspect-ratio: 4/5;
+    border: 1px dashed var(--line-dark);
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12.5px;
+    color: var(--cream-dim);
+    text-align: center;
+    padding: 10px;
+  }
+
+  /* ---------- GUEST APPLICATION ---------- */
+  .apply {
+    background: var(--parchment);
+    padding: 100px 0;
+  }
+  .apply .wrap {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: 60px;
+  }
+  .apply .eyebrow-line {
+    font-size: 14px;
+    color: var(--teal);
+    margin-bottom: 14px;
+  }
+  .apply h2 {
+    font-size: 30px;
+    line-height: 1.25;
+    max-width: 15ch;
+    margin-bottom: 16px;
+  }
+  .apply .apply-note {
+    font-size: 15px;
+    color: var(--dark-dim);
+    max-width: 34ch;
+  }
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px 24px;
+  }
+  .field { display: flex; flex-direction: column; gap: 8px; }
+  .field.full { grid-column: 1 / -1; }
+  .field label {
+    font-size: 13px;
+    color: var(--dark-dim);
+  }
+  .field input, .field textarea {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--line-light);
+    padding: 10px 0;
+    color: var(--dark-text);
+  }
+  .field input:focus, .field textarea:focus {
+    outline: none;
+    border-bottom-color: var(--brass);
+  }
+  .field textarea { resize: none; }
+  .submit-row { margin-top: 30px; grid-column: 1 / -1; }
+  .submit-btn {
+    display: inline-block;
+    background: var(--ink);
+    color: var(--cream-text);
+    font-size: 14px;
+    padding: 14px 28px;
+    border-radius: 2px;
+  }
+
+  /* ---------- CONTACT / FOOTER ---------- */
+  footer {
+    background: var(--ink);
+    color: var(--cream-text);
+    padding: 90px 0 40px;
+  }
+  .footer-main {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr 1fr;
+    gap: 40px;
+    padding-bottom: 60px;
+    border-bottom: 1px solid var(--line-dark);
+  }
+  .footer-main h2 {
+    font-size: 32px;
+    line-height: 1.2;
+    max-width: 14ch;
+  }
+  .footer-col .col-label {
+    font-size: 13px;
+    color: var(--cream-dim);
+    margin-bottom: 14px;
+  }
+  .footer-col a, .footer-col p {
+    display: block;
+    font-size: 15px;
+    color: var(--cream-text);
+    margin-bottom: 8px;
+  }
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 26px;
+    font-size: 13px;
+    color: var(--cream-dim);
+  }
+
+  @media (max-width: 860px) {
+    .hero .wrap, .duality-grid, .about .wrap, .podcast-top, .apply .wrap, .footer-main {
+      grid-template-columns: 1fr;
+    }
+    .hero-side { border-left: none; padding-left: 0; border-top: 1px solid var(--line-dark); padding-top: 28px; }
+    .duality-col { border-right: none; padding: 32px 0; border-bottom: 1px solid var(--line-light); }
+    .duality-col:last-child { padding-left: 0; }
+    .hero h1 { font-size: 42px; }
+    .episode { grid-template-columns: 1fr; gap: 6px; }
+    nav { display: none; }
+    .form-grid { grid-template-columns: 1fr; }
+    .connect-grid { grid-template-columns: 1fr 1fr; }
+    .moments-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="logo">Jason Lee</div>
+    <nav>
+      <a href="#work">Work</a>
+      <a href="#podcast">The Living Question</a>
+      <a href="#apply">Be a guest</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a href="#contact" class="nav-cta">Get in touch</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <div class="hero-role">Concierge Business Advisor · Host of <em style="font-style:italic;">The Living Question</em></div>
+      <h1>Jason Lee</h1>
+      <p class="hero-lede">He helps business owners navigate the decisions, people, and moving parts behind the businesses and lives they're actually trying to build — and hosts a weekly conversation about what happens when logic isn't enough.</p>
+    </div>
+    <div class="hero-side">
+      <div class="photo-placeholder">Photo of Jason — to add</div>
+      <span class="draft-note">Draft bio — Jason to edit</span>
+      <p>Operator, advisor, and interviewer. Jason works hands-on with business and property operations through CBA Lifestyle, and explores the harder-to-name side of decision-making on his podcast.</p>
+      <div class="cta-row">
+        <a href="#podcast" class="btn"><span>Listen</span>to The Living Question</a>
+        <a href="#contact" class="btn"><span>Connect</span>with Jason</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="duality" id="work">
+  <div class="wrap">
+    <div class="duality-head">
+      <div class="eyebrow-line">Two ways he shows up</div>
+      <h2>The operator behind the businesses, and the interviewer behind the questions.</h2>
+    </div>
+    <div class="duality-grid">
+      <div class="duality-col">
+        <div class="tag">Operator</div>
+        <h3>Business &amp; property, hands-on</h3>
+        <p>Concierge Business Advisor at CBA Lifestyle — coordinating the real, unglamorous work behind running a business or property well.</p>
+        <ul>
+          <li>Property & project coordination</li>
+          <li>Contractor and vendor management</li>
+          <li>Business operations advisory</li>
+        </ul>
+      </div>
+      <div class="duality-col">
+        <div class="tag">Interviewer</div>
+        <h3>Decisions, examined slowly</h3>
+        <p>Host of <em style="font-style:italic;">The Living Question</em> — long conversations with founders and leaders about the calls that logic alone couldn't make.</p>
+        <ul>
+          <li>Weekly, long-form conversations</li>
+          <li>No packaged lessons or forced takeaways</li>
+          <li>Guests: founders, leaders, and builders</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="about">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow-line">About CBA Lifestyle</div>
+      <h2>What Jason actually does, day to day.</h2>
+    </div>
+    <div class="about-body">
+      <span class="draft-note">Draft — pending Jason's edit</span>
+      <p>CBA Lifestyle is Jason's business and property operations practice — helping owners handle the coordination, projects, and decisions that keep a property or business running well, from contractor scheduling to day-to-day operations.</p>
+      <p>This section is a placeholder. Once Jason confirms exactly what CBA covers and who it serves, this becomes the real, specific description.</p>
+    </div>
+  </div>
+</section>
+
+<section class="podcast" id="podcast">
+  <div class="wrap">
+    <div class="podcast-top">
+      <div>
+        <div class="eyebrow-line">The Podcast</div>
+        <h2>The Living Question</h2>
+        <div class="listen-links">
+          <a href="#">Apple Podcasts</a>
+          <a href="#">Amazon Music</a>
+          <a href="#">livingquestionpodcast.com</a>
+        </div>
+      </div>
+      <div class="question">"Conversations for the moments when logic isn't enough — the inner foundation that makes external success sustainable. No packaged lessons, no premature clarity."</div>
+    </div>
+
+    <div class="episodes">
+      <div class="episode">
+        <div class="ep-date">Jul 28, 2026</div>
+        <div class="ep-guest">Chris Gray</div>
+        <div class="ep-title">The Cost of Trusting Your Gut</div>
+      </div>
+      <div class="episode">
+        <div class="ep-date">Jun 26, 2026</div>
+        <div class="ep-guest">Taylor Frame</div>
+        <div class="ep-title">Why Logic Often Fails You and the Hidden Cost of Trusting Your Gut</div>
+      </div>
+      <div class="episode">
+        <div class="ep-date">Jun 16, 2026</div>
+        <div class="ep-guest">Kelly Greenheart</div>
+        <div class="ep-title">Her Year-Long Migraine Broke on Day 3 of Total Silence</div>
+      </div>
+      <div class="episode">
+        <div class="ep-date">Jun 2, 2026</div>
+        <div class="ep-guest">Eric Farewell</div>
+        <div class="ep-title">The 3 Things Every Burned-Out Founder Needs to Hear</div>
+      </div>
+      <div class="episode">
+        <div class="ep-date">May 19, 2026</div>
+        <div class="ep-guest">Jon Vroman</div>
+        <div class="ep-title">Why the Most Devoted Men Quietly Destroy What Matters Most</div>
+      </div>
+      <div class="episode">
+        <div class="ep-date">May 7, 2026</div>
+        <div class="ep-guest">Preston Smiles</div>
+        <div class="ep-title">Your Nervous System Is Lying to You About Money</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="connect">
+  <div class="wrap">
+    <div class="eyebrow-line">Connect</div>
+    <h2>Follow along across the podcast and the businesses.</h2>
+    <div class="connect-grid">
+      <div class="connect-item">
+        <span class="platform">Instagram</span>
+        <span class="count">—</span>
+      </div>
+      <div class="connect-item">
+        <span class="platform">LinkedIn</span>
+        <span class="count">—</span>
+      </div>
+      <div class="connect-item">
+        <span class="platform">The Living Question</span>
+        <span class="count">Listen</span>
+      </div>
+      <div class="connect-item">
+        <span class="platform">CBA Lifestyle</span>
+        <span class="count">Visit</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="moments">
+  <div class="wrap">
+    <div class="eyebrow-line">Moments</div>
+    <h2>Photos and clips from the podcast and the projects.</h2>
+    <div class="moments-grid">
+      <div class="slot">Podcast recording photo</div>
+      <div class="slot">Property / project photo</div>
+      <div class="slot">Guest episode clip</div>
+      <div class="slot">Behind the scenes</div>
+    </div>
+  </div>
+</section>
+
+<section class="apply" id="apply">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow-line">Be a guest</div>
+      <h2>Apply to join the conversation.</h2>
+      <p class="apply-note">Looking for founders, leaders, and builders with a real story about a decision logic couldn't make alone.</p>
+    </div>
+    <form class="form-grid">
+      <div class="field">
+        <label for="name">Name</label>
+        <input type="text" id="name">
+      </div>
+      <div class="field">
+        <label for="email">Email</label>
+        <input type="email" id="email">
+      </div>
+      <div class="field full">
+        <label for="link">Website or social link</label>
+        <input type="text" id="link">
+      </div>
+      <div class="field full">
+        <label for="story">What's the decision you'd want to talk about?</label>
+        <textarea id="story" rows="4"></textarea>
+      </div>
+      <div class="submit-row">
+        <span class="submit-btn">Submit application</span>
+      </div>
+    </form>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="footer-main">
+      <div>
+        <h2>Let's talk business, property, or the podcast.</h2>
+      </div>
+      <div class="footer-col">
+        <div class="col-label">Contact</div>
+        <span class="draft-note" style="margin-bottom:14px;">Placeholder — confirm with Jason</span>
+        <a href="mailto:hello@leejason.net">hello@leejason.net</a>
+        <a href="#">Book a call</a>
+      </div>
+      <div class="footer-col">
+        <div class="col-label">Elsewhere</div>
+        <a href="#">The Living Question</a>
+        <a href="#">LinkedIn</a>
+        <a href="#">Instagram</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>Jason Lee</span>
+      <span>Prototype — built with Claude</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

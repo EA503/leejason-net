@@ -1,36 +1,79 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# leejason.net
 
-## Getting Started
+Personal site for Jason Lee — Concierge Business Advisor at CBA Lifestyle and host of
+*The Living Question*. Next.js 16 (App Router) with Sanity as the CMS, deployed on Vercel.
 
-First, run the development server:
+## Running locally
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The site runs with **no configuration at all**. Until Sanity is connected it renders the
+placeholder copy from the approved prototype (`src/content/fallback.ts`), so the design is
+always viewable and the build never breaks on missing credentials.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## What Jason can edit, and where
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Everything editable lives at **`/studio`** (`leejason.net/studio` in production). The
+sidebar shows exactly seven things and nothing else:
 
-## Learn More
+| In the Studio | What it controls |
+| --- | --- |
+| Hero & Bio | Intro paragraph, short bio, photo of Jason, SEO description |
+| CBA Lifestyle description | The dark "About" section |
+| Contact info | Name, public email, booking link |
+| Links | Apple Podcasts, Amazon Music, podcast site, LinkedIn, Instagram, CBA |
+| Podcast episodes | Guest, title, date, optional link — add new ones freely |
+| Moments photos | The photo grid, any number of photos |
+| Guest applications | Read-only inbox of form submissions |
 
-To learn more about Next.js, take a look at the following resources:
+Everything else — section headings, the "Two ways he shows up" copy, the podcast pull
+quote, nav labels — is hardcoded in the components, by design.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Two behaviours worth knowing:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Blank fields fall back rather than break.** An empty bio renders the prototype copy,
+  not an empty section.
+- **Blank links disappear rather than dangle.** An unset Instagram URL hides the link
+  instead of rendering a dead `#`.
 
-## Deploy on Vercel
+## Configuration
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Copy `.env.example` to `.env.local` and fill in what you have. Each block is independent —
+partial configuration works.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| Variable | Needed for |
+| --- | --- |
+| `NEXT_PUBLIC_SANITY_PROJECT_ID` | Turns on live content and the Studio |
+| `NEXT_PUBLIC_SANITY_DATASET` | Defaults to `production` |
+| `SANITY_API_READ_TOKEN` | Reading content |
+| `SANITY_API_WRITE_TOKEN` | Saving guest applications |
+| `SANITY_REVALIDATE_SECRET` | The publish-to-live webhook |
+| `RESEND_API_KEY`, `GUEST_APPLICATION_TO_EMAIL` | Emailing guest applications |
+| `NEXT_PUBLIC_SITE_URL` | Canonical URL, OG tags, sitemap |
+
+### Instant publishing
+
+The homepage is static and revalidated on demand. In sanity.io/manage → API → Webhooks:
+
+- **URL** `https://leejason.net/api/revalidate`
+- **Trigger on** create, update, delete
+- **Secret** the same value as `SANITY_REVALIDATE_SECRET`
+
+Without the webhook content still refreshes, just on an hourly cycle instead of instantly.
+
+## Layout
+
+```
+src/
+├── app/            routes, metadata, OG image, /studio, /api
+├── components/     one folder per section: .tsx + .module.css
+├── content/        fallback copy from the prototype
+└── sanity/         client, image builder, GROQ queries, schemas
+```
+
+`prototype-reference.html` is the original approved prototype, kept for design reference.
+The CSS in `globals.css` and the component modules is ported from it verbatim; verified
+against it with a computed-style diff (grids, section padding and colors match exactly).
