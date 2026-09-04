@@ -31,7 +31,10 @@ async function notifyByEmail(application: {
   }
 
   const resend = new Resend(apiKey)
-  await resend.emails.send({
+
+  // The SDK reports API failures in the returned `error` rather than throwing,
+  // so an unverified sending domain would otherwise fail completely silently.
+  const { error } = await resend.emails.send({
     from: `The Living Question <${from}>`,
     to: [to],
     replyTo: application.email,
@@ -45,6 +48,12 @@ async function notifyByEmail(application: {
       <p style="white-space:pre-wrap">${escapeHtml(application.story)}</p>
     `,
   })
+
+  if (error) {
+    // Raised so the caller logs it. The application is already stored, so the
+    // submission still succeeds for the visitor.
+    throw new Error(`Resend refused the message: ${error.name} — ${error.message}`)
+  }
 }
 
 export async function submitApplication(
