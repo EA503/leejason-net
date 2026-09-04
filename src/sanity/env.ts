@@ -1,3 +1,5 @@
+// Pinned on purpose: Sanity treats the API version as a contract, so a fixed
+// date keeps query behaviour stable even as the platform moves forward.
 export const apiVersion = '2026-09-04'
 
 export const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || 'production'
