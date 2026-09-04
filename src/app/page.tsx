@@ -9,6 +9,8 @@ import { Moments } from '@/components/Moments/Moments'
 import { Podcast } from '@/components/Podcast/Podcast'
 import { getSiteContent } from '@/sanity/queries'
 
+// One GROQ round-trip fills every section; the sections themselves stay
+// presentational so there is a single place to reason about content.
 export default async function HomePage() {
   const content = await getSiteContent()
 
