@@ -64,6 +64,16 @@ The homepage is static and revalidated on demand. In sanity.io/manage → API �
 
 Without the webhook content still refreshes, just on an hourly cycle instead of instantly.
 
+## Deploying
+
+Pushes to `main` deploy automatically through the Vercel Git integration.
+
+One gotcha worth knowing: **Vercel only builds commits whose author belongs to
+the Vercel team.** A commit from an outside author still creates a deployment,
+but it never builds — it sits with no logs and no duration, and cannot be
+redeployed. If a push seems to do nothing, check `git config user.email` before
+looking anywhere else.
+
 ## Layout
 
 ```
