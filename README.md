@@ -64,6 +64,19 @@ The homepage is static and revalidated on demand. In sanity.io/manage → API �
 
 Without the webhook content still refreshes, just on an hourly cycle instead of instantly.
 
+## Where this folder lives
+
+This project sits inside `~/Desktop/Claude Code 1/`, which is itself the working
+tree of a *different* repo (Pulse-Desk-). That is intentional, for folder
+organisation, and it is safe because this directory has its own `.git` and is
+listed in the parent repo's `.gitignore` — the parent cannot see or stage it,
+even under `git add -A`.
+
+One caveat: `git clean -xffd` (double `-f`) run in the parent **would** delete
+this directory. Plain `git clean -xfd` will not, because git refuses to recurse
+into a nested repository. Everything here is pushed to GitHub, but uncommitted
+work and `.env.local` would be lost.
+
 ## Deploying
 
 Pushes to `main` deploy automatically through the Vercel Git integration.
